@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/style1.css">
+    <title>Inicio - Diversa-mente</title>
+    <style>
+        /* Estilos para el chatbox */
+        .chatbox-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px; /* Ancho del chatbox */
+            max-width: 90%; /* Asegura que no se salga de la pantalla */
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            display: none; /* Ocultado por defecto */
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .chatbox-header {
+            background-color: #2a704e; /* Color del encabezado */
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .chatbox-body {
+            padding: 10px;
+            height: 200px; /* Altura del cuerpo del chat */
+            overflow-y: auto; /* Permite desplazamiento vertical */
+        }
+
+        .chatbox-footer {
+            display: flex;
+            padding: 10px;
+        }
+
+        .chatbox-footer input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbox-footer button {
+            padding: 5px 10px;
+            background-color: #2a704e; /* Botón con color de encabezado */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light fixed-top" style="background-color: #2a704e;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="./Imagenes/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <span class="ms-2 text-white">Diversa-mente</span>
+            </a>
+
+            <ul class="nav justify-content-center mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" id="quienesSomosLink">¿Quienes somos?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" id="consultaVirtualLink">Consulta Virtual</a>
+                </li>
+            </ul>
+
+            <!-- Usuario logueado -->
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="userName"><i class="fas fa-user"></i></span> <!-- Nombre del usuario -->
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenedor para la tarjeta de "Próximamente" -->
+    <div id="proximamenteCard" class="about-card hidden">
+        <div class="card-content">
+            <h3>Consulta Virtual</h3>
+            <p>Próximamente...</p>
+            <button id="closeProximamenteBtn" class="btn">Cerrar</button>
+        </div>
+    </div>
+    <!-- Contenedor para la tarjeta de "¿Quiénes somos?" -->
+    <div id="quienesSomosCard" class="about-card hidden">
+        <div class="card-content">
+            <h3>¿Quiénes somos?</h3>
+            <p>
+                En Diversa-mente, nos dedicamos a brindar información y apoyo en temas relacionados con la salud mental.
+                Nuestro objetivo es ofrecer recursos, guías y orientación para mejorar el bienestar mental de las
+                personas.
+            </p>
+            <button id="closeCardBtn" class="btn btn-danger">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <h1>Bienvenido a Diversa-mente</h1>
+        <!-- Cards Section -->
+        <div class="row">
+            <!-- Card 1: Depresión -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <img src="./Imagenes/1.jpeg" class="card-img-top" alt="Depresión">
+                    <div class="card-body">
+                        <h5 class="card-title">Depresión</h5>
+                        <p class="card-text">La depresión es un trastorno mental que afecta el estado de ánimo,
+                            generando sentimientos persistentes de tristeza y pérdida de interés. Conoce más sobre sus
+                            síntomas, causas y tratamientos.</p>
+                        <a href="depresion.html" class="btn btn-success w-100">Leer más</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Ansiedad -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <img src="./Imagenes/2.jpeg" class="card-img-top" alt="Ansiedad">
+                    <div class="card-body">
+                        <h5 class="card-title">Ansiedad</h5>
+                        <p class="card-text">La ansiedad puede manifestarse de diversas formas, desde preocupaciones constantes hasta síntomas físicos como falta de aliento. Descubre cómo la ciencia y la práctica diaria pueden ayudarte a mejorar tu bienestar emocional.</p>
+                        <a href="ansiedad.html" class="btn btn-success w-100">Leer más</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Anorexia -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <img src="./Imagenes/anorexia.jpg" class="card-img-top" alt="Anorexia">
+                    <div class="card-body">
+                        <h5 class="card-title">Anorexia</h5>
+                        <p class="card-text">La anorexia es un trastorno alimentario caracterizado por la pérdida de
+                            peso extrema y el temor intenso a ganar peso. Explora las causas, síntomas y los enfoques
+                            terapéuticos que ayudan en su tratamiento.</p>
+                        <a href="anorexia.html" class="btn btn-success w-100">Leer más</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Neurodivergencia -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <img src="./Imagenes/4.jpeg" class="card-img-top" alt="Neurodivergencia">
+                    <div class="card-body">
+                        <h5 class="card-title">Neurodivergencia</h5>
+                        <p class="card-text">Conoce más sobre la neurodivergencia y sus implicaciones.</p>
+                        <a href="neurodivergencia.html" class="btn btn-success w-100">Leer más</a>
+                    </div>
+                </div>
+            </div>
+       <!-- Card 5: TDAH -->
+       <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card">
+            <img src="./Imagenes/tdah.png" class="card-img-top" alt="TDAH">
+            <div class="card-body">
+                <h5 class="card-title">TDAH</h5>
+                <p class="card-text">El Trastorno por Déficit de Atención e Hiperactividad (TDAH) es una condición neurobiológica que afecta la capacidad de atención, el autocontrol y la regulación de impulsos. Los síntomas incluyen inatención, hiperactividad y comportamientos impulsivos. Es fundamental comprender sus causas, síntomas y enfoques terapéuticos que pueden ayudar en su manejo.</p>
+                <a href="tdah.html" class="btn btn-success w-100">Leer más</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+    <!-- Botón para abrir el chatbot -->
+    <button id="openChatbotBtn" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px;">
+        💬
+    </button>
+
+<!-- Contenedor del chatbot -->
+<div class="chatbox-container" id="chatboxContainer" style="width: 400px; height: 500px;">
+    <div class="chatbox-header">
+        <h5>Didi🤖</h5>
+        <button id="closeChatboxBtn" style="float: right; background: none; border: none; color: white;">&times;</button>
+    </div>
+    <div class="chatbox-body" style="height: 400px;"> <!-- Ajusta la altura del cuerpo -->
+        <iframe id="chatbotIframe" src="https://app.gpt-trainer.com/widget/8feeaccbf3694ba1bab4751f423b189a" width="100%" height="100%"></iframe>
+    </div>
+</div>
+
+<script>
+    // Reiniciar el chat al recargar la página
+    window.onload = function() {
+        document.getElementById('chatbotIframe').src = "https://app.gpt-trainer.com/widget/8feeaccbf3694ba1bab4751f423b189a"; // Asigna el src del iframe
+    };
+
+    // Mostrar/Ocultar tarjeta "¿Quiénes somos?" al hacer clic en el enlace
+    document.getElementById('quienesSomosLink').onclick = function () {
+        document.getElementById('quienesSomosCard').classList.toggle('hidden');
+    };
+
+    // Cerrar la tarjeta "¿Quiénes somos?"
+    document.getElementById('closeCardBtn').onclick = function () {
+        document.getElementById('quienesSomosCard').classList.add('hidden');
+    };
+
+    // Mostrar/Ocultar tarjeta "Consulta Virtual"
+    document.getElementById('consultaVirtualLink').onclick = function () {
+        document.getElementById('proximamenteCard').classList.toggle('hidden');
+    };
+
+    // Cerrar la tarjeta "Consulta Virtual"
+    document.getElementById('closeProximamenteBtn').onclick = function () {
+        document.getElementById('proximamenteCard').classList.add('hidden');
+    };
+
+    // Mostrar/Ocultar el chatbot
+    document.getElementById('openChatbotBtn').onclick = function () {
+        document.getElementById('chatboxContainer').style.display = 'flex'; // Muestra el chatbox
+    };
+
+    document.getElementById('closeChatboxBtn').onclick = function () {
+        document.getElementById('chatboxContainer').style.display = 'none'; // Oculta el chatbox
+    };
+</script>
+ 
+    <script>
+        // Mostrar/Ocultar tarjeta "¿Quiénes somos?" al hacer clic en el enlace
+        document.getElementById('quienesSomosLink').onclick = function () {
+            document.getElementById('quienesSomosCard').classList.toggle('hidden');
+        };
+
+        // Cerrar la tarjeta "¿Quiénes somos?"
+        document.getElementById('closeCardBtn').onclick = function () {
+            document.getElementById('quienesSomosCard').classList.add('hidden');
+        };
+
+        // Mostrar/Ocultar tarjeta "Consulta Virtual"
+        document.getElementById('consultaVirtualLink').onclick = function () {
+            document.getElementById('proximamenteCard').classList.toggle('hidden');
+        };
+
+        // Cerrar la tarjeta "Consulta Virtual"
+        document.getElementById('closeProximamenteBtn').onclick = function () {
+            document.getElementById('proximamenteCard').classList.add('hidden');
+        };
+
+        // Mostrar/Ocultar el chatbot
+        document.getElementById('openChatbotBtn').onclick = function () {
+            document.getElementById('chatboxContainer').style.display = 'flex'; // Muestra el chatbox
+        };
+
+        document.getElementById('closeChatboxBtn').onclick = function () {
+            document.getElementById('chatboxContainer').style.display = 'none'; // Oculta el chatbox
+        };
+
+        // Cerrar sesión con confirmación
+    document.getElementById('logoutBtn').onclick = function () {
+        if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+            window.location.href = "login.html"; // Redirige al login
+        }
+    };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

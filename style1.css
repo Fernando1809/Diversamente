@@ -1,0 +1,96 @@
+/* Asegura que el contenido no quede pegado a la barra de navegación */
+body {
+    padding-top: 70px; /* Ajusta según la altura de tu navbar */
+}
+
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-top {
+    height: 200px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Ajustar imagen sin distorsionar */
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ajuste general para la separación del contenido */
+.container {
+    padding-top: 20px; /* Espacio extra por encima del contenido */
+    padding-bottom: 20px; /* Espacio extra por debajo del contenido */
+}
+
+/* Opcional: Estilo para el navbar fijo */
+.navbar {
+    z-index: 1000; /* Asegura que la navbar esté por encima de otros elementos */
+}
+#chatbotButton {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+
+#chatbotButton:hover {
+    background-color: #2a704e; /* Un tono más oscuro al pasar el mouse */
+}
+#chatbotButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: #2a704e; /* Color del botón */
+    color: white; /* Color del ícono */
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+}
+#chatbotButton:hover {
+    background-color: #15d679; /* Un tono más oscuro al pasar el mouse */
+}
+/* Ocultar la tarjeta inicialmente */
+.hidden {
+    display: none;
+}
+
+/* Estilos para la tarjeta */
+.about-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-content h3 {
+    margin-top: 0;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #2a704e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}

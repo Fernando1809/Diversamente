@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/style1.css">
+    <link rel="stylesheet" href="/csschat.css">
+    <title>Inicio - Diversa-mente</title>
+</head>
+<style>
+    /* Estilos para el chatbox */
+    .chatbox-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px; /* Ancho del chatbox */
+        max-width: 90%; /* Asegura que no se salga de la pantalla */
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        display: none; /* Ocultado por defecto */
+        flex-direction: column;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .chatbox-header {
+        background-color: #2a704e; /* Color del encabezado */
+        color: white;
+        padding: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .chatbox-body {
+        padding: 10px;
+        height: 200px; /* Altura del cuerpo del chat */
+        overflow-y: auto; /* Permite desplazamiento vertical */
+    }
+
+    .chatbox-footer {
+        display: flex;
+        padding: 10px;
+    }
+
+    .chatbox-footer input {
+        flex: 1;
+        padding: 5px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .chatbox-footer button {
+        padding: 5px 10px;
+        background-color: #2a704e; /* Botón con color de encabezado */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<style>
+    .container {
+        margin-top: 80px; /* Para evitar que se superponga con el navbar */
+        padding: 20px;
+        text-align: center; /* Para centrar el texto */
+    }
+
+    .hidden {
+        display: none; /* Esto oculta el elemento */
+    }
+
+    .about-card {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+</style>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light fixed-top" style="background-color: #2a704e;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="./Imagenes/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <span class="ms-2 text-white">Diversa-mente</span>
+            </a>
+
+            <ul class="nav justify-content-center mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" id="quienesSomosLink">¿Quienes somos?</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" id="consultaVirtualLink">Consulta Virtual</a>
+                </li>
+                
+            </ul>    
+
+            <!-- Usuario logueado -->
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="userName"><i class="fas fa-user"></i></span> <!-- Nombre del usuario -->
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Contenedor para la tarjeta de "Próximamente" -->
+<div id="proximamenteCard" class="about-card hidden">
+    <div class="card-content">
+        <h3>Consulta Virtual</h3>
+        <p>Próximamente...</p>
+        <button id="closeProximamenteBtn" class="btn">Cerrar</button>
+    </div>
+</div>
+             <!-- Contenedor para la tarjeta de "¿Quiénes somos?" -->
+    <div id="quienesSomosCard" class="about-card hidden">
+        <div class="card-content">
+            <h3>¿Quiénes somos?</h3>
+            <p>
+                En Diversa-mente, nos dedicamos a brindar información y apoyo en temas relacionados con la salud mental.
+                Nuestro objetivo es ofrecer recursos, guías y orientación para mejorar el bienestar mental de las
+                personas.
+            </p>
+            <button id="closeCardBtn" class="btn">Cerrar</button>
+        </div>
+    </div>
+    <!-- Contenedor principal -->
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 60px;">
+        <div class="card shadow-lg p-4" style="max-width: 800px;">
+            <h1 class="text-center">Información sobre Neurodivergencia</h1>
+
+            <div class="info-section">
+                <h2>¿Qué es la neurodivergencia?</h2>
+                <p>
+                    La neurodivergencia es un término general para referirse a los individuos que viven con autismo principalmente, 
+                    pero también abarca dislexia, dispraxia, déficit atencional con hiperactividad (TDAH), u otras condiciones que 
+                    los llevan a navegar procesos cognitivos y emocionales de manera distinta a la norma.
+                </p>
+                <p>
+                    El término fue acuñado en los 90, cuando activistas por los derechos de las personas con autismo como Jim Sinclair, 
+                    Kathy Lissner Grant y Donna Williams fundaron la Red Internacional del Autismo, bajo el principio de que esta 
+                    condición no es una enfermedad, sino un estilo de procesamiento cognitivo.
+                </p>
+                <h2>Neurodiversidad y salud mental</h2>
+                <p>
+                    Aunque las personas con condiciones neurodiversas tienen ciertos puntos fuertes, también hay pruebas de que las personas 
+                    con autismo, dispraxia y TDAH presentan mayores tasas de trastornos mentales como la depresión y la ansiedad.
+                </p>
+                <p>
+                    El empresario Sir Richard Branson ha hablado abiertamente sobre los beneficios de su diagnóstico de dislexia en términos de 
+                    pensamiento creativo y habilidades empresariales, refiriéndose a la condición como su "superpoder".
+                </p>
+            </div>
+
+            <!-- Botón para el test -->
+            <div class="text-center mt-4">
+                <button class="btn btn-success btn-test" onclick="location.href='testNeu.html';">Realizar Test</button>
+            </div>
+        </div>
+    </div>
+    
+<!-- Botón para abrir el chatbot -->
+<button id="openChatbotBtn" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px;">
+    💬
+</button>
+
+<!-- Contenedor del chatbot -->
+<div class="chatbox-container" id="chatboxContainer" style="width: 400px; height: 500px;">
+<div class="chatbox-header">
+    <h5>Didi🤖</h5>
+    <button id="closeChatboxBtn" style="float: right; background: none; border: none; color: white;">&times;</button>
+</div>
+<div class="chatbox-body" style="height: 400px;"> <!-- Ajusta la altura del cuerpo -->
+    <iframe id="chatbotIframe" src="https://app.gpt-trainer.com/widget/8feeaccbf3694ba1bab4751f423b189a" width="100%" height="100%"></iframe>
+</div>
+</div>
+
+<script>
+// Reiniciar el chat al recargar la página
+window.onload = function() {
+    document.getElementById('chatbotIframe').src = "https://app.gpt-trainer.com/widget/8feeaccbf3694ba1bab4751f423b189a"; // Asigna el src del iframe
+};
+
+// Mostrar/Ocultar tarjeta "¿Quiénes somos?" al hacer clic en el enlace
+document.getElementById('quienesSomosLink').onclick = function () {
+    document.getElementById('quienesSomosCard').classList.toggle('hidden');
+};
+
+// Cerrar la tarjeta "¿Quiénes somos?"
+document.getElementById('closeCardBtn').onclick = function () {
+    document.getElementById('quienesSomosCard').classList.add('hidden');
+};
+
+// Mostrar/Ocultar tarjeta "Consulta Virtual"
+document.getElementById('consultaVirtualLink').onclick = function () {
+    document.getElementById('proximamenteCard').classList.toggle('hidden');
+};
+
+// Cerrar la tarjeta "Consulta Virtual"
+document.getElementById('closeProximamenteBtn').onclick = function () {
+    document.getElementById('proximamenteCard').classList.add('hidden');
+};
+
+// Mostrar/Ocultar el chatbot
+document.getElementById('openChatbotBtn').onclick = function () {
+    document.getElementById('chatboxContainer').style.display = 'flex'; // Muestra el chatbox
+};
+
+document.getElementById('closeChatboxBtn').onclick = function () {
+    document.getElementById('chatboxContainer').style.display = 'none'; // Oculta el chatbox
+};
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/script.js"></script>
+    <script src="/chat.js"></script>
+</body>
+</html>
